@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.java.model.Average;
 import com.example.java.model.SensorEntry;
 import com.example.java.repository.SensorEntryRepository;
 
@@ -41,11 +42,6 @@ public class SensorEntryServiceImpl implements SensorEntryService{
 
 	@Override
 	public float average(String type) {
-		float average=0;
-		List<SensorEntry> tempList = sensorEntryRepository.findBySensorType(type);
-		for(SensorEntry s : tempList) {
-			average = average+s.getData();
-		}
-		return average/tempList.size();
+		return sensorEntryRepository.averageBySensorType(type).getAvgData();
 	}
 }
